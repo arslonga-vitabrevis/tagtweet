@@ -17,6 +17,12 @@ class TweetsController < ApplicationController
     end
   end
 
+  def search
+    return nil if params[:input] == ""
+    tag = Tag.where(['name LIKE ?', "%#{:input}%"])
+    render json:{ keyword: tag }
+  end
+
   private
 
   def tweet_params
